@@ -15,8 +15,6 @@ export const consumeStockEvent = async () => {
     channel.consume(queue.queue, async (message) => {
       if (message) {
         const stockUpdate = JSON.parse(message.content.toString());
-        console.log({ message, stockUpdate });
-        console.log('Stock update received:', stockUpdate);
         await logStockUpdate(stockUpdate);
         channel.ack(message);
       }
